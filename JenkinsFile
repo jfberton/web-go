@@ -1,13 +1,12 @@
 pipeline {
     agent { label 'tuto' }
-    
-
+   
     stages {
         stage('Build') {
             steps {
                 container('podman') {
                     script {
-                        sh 'podman ps'
+                        sh 'podman build --tag docker.io/bertontheone/container_go -f ./Dockerfile'
                     }
                 }
                 container('kubectl') {
