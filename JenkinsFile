@@ -12,7 +12,18 @@ pipeline {
                     script {
                         sh 'podman build --tag docker.io/bertontheone/container_go:$BUILD_NUMBER -f ./Dockerfile'
                         sh 'podman login docker.io -u $DOCKERHUB_CREDS_USR -p $DOCKERHUB_CREDS_PSW'
+                        sh 'podman tag docker.io/bertontheone/container_go:$BUILD_NUMBER docker.io/bertontheone/container_go:latest'
                         sh 'podman push docker.io/bertontheone/container_go:$BUILD_NUMBER'
+                        sh 'podman push docker.io/bertontheone/container_go:latest'
+                    }
+                }
+            }
+        }
+    stage('Deploy') {
+            steps {
+                container('kubectl') {
+                    script {
+                        sh 'kubectl apply -f despliegue.yaml'
                     }
                 }
             }
