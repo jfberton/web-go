@@ -12,7 +12,7 @@ pipeline {
                     script {
                         sh 'podman build --tag docker.io/bertontheone/container_go:$BUILD_NUMBER -f ./Dockerfile'
                         sh 'podman login -u $DOCKERHUB_CREDS_USER -p DOCKERHUB_CREDS_PWS'
-                        sh 'podman push docker.io/bertontheone/web-go:$BUILD_NUMBER'
+                        sh 'podman push docker.io/bertontheone/container_go:$BUILD_NUMBER'
                     }
                 }
                 container('kubectl') {
