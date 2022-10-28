@@ -24,8 +24,8 @@ pipeline {
                 container('kubectl') {
                     script {
                         sh 'kubectl apply -f despliegue.yaml'
-                        sh 'kubectl rollout restart -n berton containergo'
-                        sh 'kubectl rollout status -n berton containergo'
+                        sh 'kubectl rollout restart deployment -n berton containergo'
+                        sh 'kubectl rollout status deployment -n berton containergo'
                     }
                 }
             }
