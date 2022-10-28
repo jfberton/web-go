@@ -15,11 +15,6 @@ pipeline {
                         sh 'podman push docker.io/bertontheone/container_go:$BUILD_NUMBER'
                     }
                 }
-                container('kubectl') {
-                    script {
-                        sh 'kubectl version'
-                    }
-                }
             }
         }
     }
